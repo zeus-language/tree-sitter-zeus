@@ -8,6 +8,7 @@
       "scope": "source.zeus",
       "file-types": ["zeus"],
       "injection-regex": "^zeus$",
+      "highlights": ["queries/highlights.scm"],
       "class-name": "TreeSitterZeus"
     }
   ],

@@ -46,7 +46,11 @@ module.exports = grammar({
       seq(
         // All line comments start with two //
         "//",
-        /[.s]+/,
+        choice(
+          seq(token.immediate(prec(2, /\/\//)), /.*/),
+          // A regular doc comment
+          token.immediate(prec(1, /.*/)),
+        ),
       ),
 
     block_comment: ($) => seq("/*", /[a-zA-Z]+/, "*/"),
@@ -88,9 +92,12 @@ module.exports = grammar({
         $.variable_declaration,
         $.variable_assignment,
         $.comment,
-        seq($.func_call, ";"),
+        $.if_statement,
+        seq($.call_expression, ";"),
         // TODO: other kinds of statements
       ),
+    if_statement: ($) =>
+      seq("if", $._expression, $.block, optional(seq("else", $.block))),
     variable_assignment: ($) =>
       seq(
         field("name", $.identifier),
@@ -114,11 +121,11 @@ module.exports = grammar({
         $.identifier,
         $.number,
         $.string,
-        $.func_call,
+        $.call_expression,
         // TODO: other kinds of expressions
       ),
     string: ($) => seq('"', /(.s)*/, '"'),
-    func_call: ($) => seq(field("name", $.identifier), $.arglist),
+    call_expression: ($) => seq(field("function", $.identifier), $.arglist),
     arglist: ($) => seq("(", repeat($._expression), ")"),
     binary_expression: ($) => {
       const table = [

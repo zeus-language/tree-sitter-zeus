@@ -1,4 +1,4 @@
-
+// here is a comment
 
 fn main()  : i32{
     let MY_CONST :i32 = 234;

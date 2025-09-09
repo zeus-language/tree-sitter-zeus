@@ -44,8 +44,40 @@
           "value": "//"
         },
         {
-          "type": "PATTERN",
-          "value": "[.s]+"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PREC",
+                    "value": 2,
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "\\/\\/"
+                    }
+                  }
+                },
+                {
+                  "type": "PATTERN",
+                  "value": ".*"
+                }
+              ]
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": ".*"
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -254,15 +286,57 @@
           "name": "comment"
         },
         {
+          "type": "SYMBOL",
+          "name": "if_statement"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "func_call"
+              "name": "call_expression"
             },
             {
               "type": "STRING",
               "value": ";"
+            }
+          ]
+        }
+      ]
+    },
+    "if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "if"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "else"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "block"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
             }
           ]
         }
@@ -398,7 +472,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "func_call"
+          "name": "call_expression"
         }
       ]
     },
@@ -419,12 +493,12 @@
         }
       ]
     },
-    "func_call": {
+    "call_expression": {
       "type": "SEQ",
       "members": [
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "function",
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
