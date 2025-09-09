@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "zeus",
+      "camelcase": "Zeus",
+      "title": "Zeus",
+      "scope": "source.zeus",
+      "file-types": ["zeus"],
+      "injection-regex": "^zeus$",
+      "class-name": "TreeSitterZeus"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Zeus Programming Language",
+    "authors": [
+      {
+        "name": "Stefan Lüdtke",
+        "email": "hisoka999@gmail.com",
+        "url": "https://silver-boards.com/"
+      }
+    ],
+    "links": {
+      "repository": "http://github.com/hiska999/tree-sitter-zeus"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
