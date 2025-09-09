@@ -28,6 +28,8 @@ const PREC = {
 
 module.exports = grammar({
   name: "zeus",
+  extras: ($) => [/\s/, $.line_comment, $.block_comment],
+  word: ($) => $.identifier,
 
   rules: {
     source_file: ($) => repeat($._definition),
@@ -35,14 +37,37 @@ module.exports = grammar({
     _definition: ($) =>
       choice(
         $.function_definition,
+        $.comment,
         // TODO: other kinds of definitions
       ),
+    comment: ($) => choice($.line_comment, $.block_comment),
+
+    line_comment: ($) =>
+      seq(
+        // All line comments start with two //
+        "//",
+        /[.s]+/,
+      ),
+
+    block_comment: ($) => seq("/*", /[a-zA-Z]+/, "*/"),
 
     function_definition: ($) =>
-      seq("fn", $.identifier, $.parameter_list, ":", $._type, $.block),
+      seq(
+        "fn",
+        field("name", $.identifier),
+        $.parameter_list,
+        optional(seq(":", field("return_type", $._type))),
+        field("block", $.block),
+      ),
 
     parameter_list: ($) => seq("(", optional(repeat($.parameter)), ")"),
-    parameter: ($) => seq($.identifier, ":", $._type, ","),
+    parameter: ($) =>
+      seq(
+        field("name", $.identifier),
+        ":",
+        field("type", $._type),
+        optional(","),
+      ),
 
     _type: ($) =>
       choice(
@@ -61,11 +86,25 @@ module.exports = grammar({
       choice(
         $.return_statement,
         $.variable_declaration,
+        $.variable_assignment,
+        $.comment,
+        seq($.func_call, ";"),
         // TODO: other kinds of statements
       ),
-
+    variable_assignment: ($) =>
+      seq(
+        field("name", $.identifier),
+        field("value", seq("=", $._expression)),
+        ";",
+      ),
     variable_declaration: ($) =>
-      seq("let", $.identifier, "=", $._expression, ";"),
+      seq(
+        "let",
+        optional("mut"),
+        field("name", $.identifier),
+        optional(field("value", seq("=", $._expression))),
+        ";",
+      ),
 
     return_statement: ($) => seq("return", $._expression, ";"),
 
@@ -74,8 +113,13 @@ module.exports = grammar({
         $.binary_expression,
         $.identifier,
         $.number,
+        $.string,
+        $.func_call,
         // TODO: other kinds of expressions
       ),
+    string: ($) => seq('"', /(.s)*/, '"'),
+    func_call: ($) => seq(field("name", $.identifier), $.arglist),
+    arglist: ($) => seq("(", repeat($._expression), ")"),
     binary_expression: ($) => {
       const table = [
         [PREC.and, "&&"],
@@ -105,7 +149,7 @@ module.exports = grammar({
       );
     },
 
-    identifier: ($) => /[a-zA-Z]+/,
+    identifier: ($) => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
 
     number: ($) => /\d+/,
   },

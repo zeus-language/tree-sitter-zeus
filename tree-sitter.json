@@ -23,7 +23,7 @@
       }
     ],
     "links": {
-      "repository": "http://github.com/hiska999/tree-sitter-zeus"
+      "repository": "http://github.com/zeus-language/tree-sitter-zeus"
     }
   },
   "bindings": {
