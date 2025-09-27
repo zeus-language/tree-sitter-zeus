@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "field_access",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -29,6 +33,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
           "named": true
         }
       ]
@@ -69,6 +77,10 @@
             "named": true
           },
           {
+            "type": "field_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -78,6 +90,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_initialization",
             "named": true
           }
         ]
@@ -138,6 +154,10 @@
             "named": true
           },
           {
+            "type": "field_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -147,6 +167,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_initialization",
             "named": true
           }
         ]
@@ -246,6 +270,10 @@
             "named": true
           },
           {
+            "type": "field_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -255,6 +283,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_initialization",
             "named": true
           }
         ]
@@ -383,6 +415,75 @@
     "fields": {}
   },
   {
+    "type": "field_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_init",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "field_access",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_statement",
     "named": true,
     "fields": {},
@@ -476,6 +577,10 @@
           "named": true
         },
         {
+          "type": "field_access",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -485,6 +590,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
           "named": true
         }
       ]
@@ -582,6 +691,10 @@
           "named": true
         },
         {
+          "type": "field_access",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -591,6 +704,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
           "named": true
         }
       ]
@@ -614,6 +731,10 @@
           "named": true
         },
         {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
           "type": "use_statement",
           "named": true
         }
@@ -634,6 +755,44 @@
         },
         {
           "type": "string_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_initialization",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_init",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -712,6 +871,10 @@
             "named": true
           },
           {
+            "type": "field_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -721,6 +884,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_initialization",
             "named": true
           }
         ]
@@ -776,6 +943,10 @@
             "named": true
           },
           {
+            "type": "field_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -785,6 +956,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "struct_initialization",
             "named": true
           }
         ]
@@ -816,6 +991,10 @@
           "named": true
         },
         {
+          "type": "field_access",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -825,6 +1004,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
           "named": true
         }
       ]
@@ -880,6 +1063,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
     "named": false
   },
   {
@@ -1033,6 +1220,10 @@
   {
     "type": "string_content",
     "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
   },
   {
     "type": "u32",

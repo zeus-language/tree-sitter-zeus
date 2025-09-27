@@ -5,6 +5,7 @@
   "mut"
   "use"
   "in"
+  "struct"
 ] @keyword
 
 ; -- Punctuation & operators

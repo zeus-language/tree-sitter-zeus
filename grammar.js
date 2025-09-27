@@ -37,11 +37,19 @@ module.exports = grammar({
     use_statement: ($) =>
       seq("use", repeat(seq($.identifier, optional("::"))), ";"),
 
+    struct_definition: ($) =>
+      seq("struct", $.type, "{", repeat($.parameter), "}"),
+
+    struct_initialization: ($) =>
+      seq($.identifier, "{", repeat($.field_init), "}"),
+    field_init: ($) =>
+      seq(field("name", $.identifier), ":", $._expression, optional(";")),
     _definition: ($) =>
       choice(
         $.function_definition,
         $.comment,
         $.use_statement,
+        $.struct_definition,
         // TODO: other kinds of definitions
       ),
     comment: ($) => choice($.line_comment, $.block_comment),
@@ -152,15 +160,18 @@ module.exports = grammar({
       ),
 
     return_statement: ($) => seq("return", $._expression, ";"),
-
+    field_access: ($) => seq($.identifier, ".", $.identifier),
     _expression: ($) =>
       choice(
         $.binary_expression,
-        $.identifier,
         $.number,
         $.string_literal,
         $.char_literal,
         $.call_expression,
+        prec(1, $.struct_initialization),
+        prec(2, $.field_access),
+        prec(3, $.identifier),
+
         // TODO: other kinds of expressions
       ),
     //string_literal: ($) => seq('"', /(.*)/, '"'),
