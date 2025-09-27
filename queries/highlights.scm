@@ -3,14 +3,15 @@
   "return"
   "let"
   "mut"
+  "use"
 ] @keyword
 
 ; -- Punctuation & operators
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
-;"[" @punctuation.bracket
-;"]" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
 "{" @punctuation.bracket
 "}" @punctuation.bracket
 
@@ -18,21 +19,21 @@
 	";"
 	","
 	":"
+	"::"
 ;	".."
 ] @punctuation.delimiter
 
 
+(primitive_type) @type.builtin
+(type) @type
+;(return_type) @type
 
-; technically operators, but better to render as reserved words
-;[
-
-;] @keyword
+(identifier)      @identifier
 
 ; -- Builtin constants
 
-;[
-
-;] @constant;
+((identifier) @constant
+ (#match? @constant "^[A-Z][A-Z\\d_]+$'"))
 (call_expression
   function: (identifier) @function)
 
@@ -46,12 +47,12 @@
 ;  "switch"
 ] @keyword.conditional
 
-;[
+[
 ;  "for"
-;  "while"
+  "while"
 ;  "break"
 ;  "continue"
-;] @keyword.repeat
+] @keyword.repeat
 
 ;[
 ;  "["
@@ -74,10 +75,11 @@
 ; -- Literals
 
 (number)   @number
-(string)   @string
-
+(string_literal)   @string
+(char_literal)     @string
 ; -- Comments
-(comment)         @comment
+(line_comment) @comment
+(block_comment) @comment
 ;(pp)              @keyword
 
 
@@ -92,6 +94,3 @@
 ;	(caseLabel)
 ;	(label)
 ;] @constant;
-
-
-(identifier)      @identifier
