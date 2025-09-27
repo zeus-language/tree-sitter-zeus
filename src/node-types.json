@@ -38,6 +38,10 @@
         {
           "type": "struct_initialization",
           "named": true
+        },
+        {
+          "type": "typecast",
+          "named": true
         }
       ]
     }
@@ -94,6 +98,10 @@
           },
           {
             "type": "struct_initialization",
+            "named": true
+          },
+          {
+            "type": "typecast",
             "named": true
           }
         ]
@@ -171,6 +179,10 @@
           },
           {
             "type": "struct_initialization",
+            "named": true
+          },
+          {
+            "type": "typecast",
             "named": true
           }
         ]
@@ -287,6 +299,10 @@
           },
           {
             "type": "struct_initialization",
+            "named": true
+          },
+          {
+            "type": "typecast",
             "named": true
           }
         ]
@@ -479,6 +495,10 @@
         {
           "type": "struct_initialization",
           "named": true
+        },
+        {
+          "type": "typecast",
+          "named": true
         }
       ]
     }
@@ -595,6 +615,10 @@
         {
           "type": "struct_initialization",
           "named": true
+        },
+        {
+          "type": "typecast",
+          "named": true
         }
       ]
     }
@@ -709,6 +733,10 @@
         {
           "type": "struct_initialization",
           "named": true
+        },
+        {
+          "type": "typecast",
+          "named": true
         }
       ]
     }
@@ -822,6 +850,57 @@
     }
   },
   {
+    "type": "typecast",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "field_access",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "struct_initialization",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typecast",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "use_statement",
     "named": true,
     "fields": {},
@@ -888,6 +967,10 @@
           },
           {
             "type": "struct_initialization",
+            "named": true
+          },
+          {
+            "type": "typecast",
             "named": true
           }
         ]
@@ -961,6 +1044,10 @@
           {
             "type": "struct_initialization",
             "named": true
+          },
+          {
+            "type": "typecast",
+            "named": true
           }
         ]
       }
@@ -1008,6 +1095,10 @@
         },
         {
           "type": "struct_initialization",
+          "named": true
+        },
+        {
+          "type": "typecast",
           "named": true
         }
       ]
@@ -1139,6 +1230,10 @@
   },
   {
     "type": "^",
+    "named": false
+  },
+  {
+    "type": "as",
     "named": false
   },
   {

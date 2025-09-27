@@ -6,6 +6,7 @@
   "use"
   "in"
   "struct"
+  "as"
 ] @keyword
 
 ; -- Punctuation & operators

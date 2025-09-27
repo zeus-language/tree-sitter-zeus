@@ -161,6 +161,7 @@ module.exports = grammar({
 
     return_statement: ($) => seq("return", $._expression, ";"),
     field_access: ($) => seq($.identifier, ".", $.identifier),
+    typecast: ($) => seq($._expression, "as", $.type),
     _expression: ($) =>
       choice(
         $.binary_expression,
@@ -171,6 +172,7 @@ module.exports = grammar({
         prec(1, $.struct_initialization),
         prec(2, $.field_access),
         prec(3, $.identifier),
+        prec(4, $.typecast),
 
         // TODO: other kinds of expressions
       ),
