@@ -99,6 +99,9 @@ module.exports = grammar({
         $.comment,
         $.if_statement,
         $.while_statement,
+        $.for_statement,
+        $.break,
+        $.continue,
         seq($.call_expression, ";"),
         // TODO: other kinds of statements
       ),
@@ -111,6 +114,24 @@ module.exports = grammar({
         field("value", seq("=", $._expression)),
         ";",
       ),
+    for_statement: ($) =>
+      seq(
+        "for",
+        optional("let"),
+        $.identifier,
+        "in",
+        choice($.identifier, $.range),
+        $.block,
+      ),
+    range: ($) =>
+      seq(
+        choice($.number, $.identifier),
+        "..",
+        optional("="),
+        choice($.number, $.identifier),
+      ),
+    break: ($) => seq("break", ";"),
+    continue: ($) => seq("continue", ";"),
     array_assignment: ($) =>
       seq(
         field("name", $.identifier),

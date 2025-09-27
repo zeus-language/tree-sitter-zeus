@@ -4,6 +4,7 @@
   "let"
   "mut"
   "use"
+  "in"
 ] @keyword
 
 ; -- Punctuation & operators
@@ -20,7 +21,7 @@
 	","
 	":"
 	"::"
-;	".."
+	".."
 ] @punctuation.delimiter
 
 
@@ -48,10 +49,10 @@
 ] @keyword.conditional
 
 [
-;  "for"
+  "for"
   "while"
-;  "break"
-;  "continue"
+  "break"
+  "continue"
 ] @keyword.repeat
 
 ;[
