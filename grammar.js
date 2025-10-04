@@ -214,7 +214,15 @@ module.exports = grammar({
           ),
         ),
       ),
-    char_literal: ($) => seq("'", /./, "'"),
+    char_literal: ($) =>
+      seq(
+        "'",
+        choice(
+          alias(token.immediate(prec(1, /[^\\'\n]+/)), $.string_content),
+          $.escape_sequence,
+        ),
+        "'",
+      ),
     call_expression: ($) => seq(field("function", $.identifier), $.arglist),
     arglist: ($) => seq("(", repeat($._expression), ")"),
     binary_expression: ($) => {

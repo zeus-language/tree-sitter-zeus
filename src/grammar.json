@@ -1098,8 +1098,29 @@
           "value": "'"
         },
         {
-          "type": "PATTERN",
-          "value": "."
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\\\\'\\n]+"
+                  }
+                }
+              },
+              "named": true,
+              "value": "string_content"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "escape_sequence"
+            }
+          ]
         },
         {
           "type": "STRING",
