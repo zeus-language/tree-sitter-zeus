@@ -7,6 +7,7 @@
   "in"
   "struct"
   "as"
+  "extern"
 ] @keyword
 
 ; -- Punctuation & operators

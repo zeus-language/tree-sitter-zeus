@@ -47,6 +47,7 @@ module.exports = grammar({
     _definition: ($) =>
       choice(
         $.function_definition,
+        $.extern_function_definition,
         $.comment,
         $.use_statement,
         $.struct_definition,
@@ -67,6 +68,15 @@ module.exports = grammar({
 
     block_comment: ($) => seq("/*", /[a-zA-Z ]+/, "*/"),
 
+    extern_function_definition: ($) =>
+      seq(
+        "extern",
+        "fn",
+        field("name", $.identifier),
+        $.parameter_list,
+        optional(seq(":", field("return_type", $.type))),
+        ";",
+      ),
     function_definition: ($) =>
       seq(
         "fn",
