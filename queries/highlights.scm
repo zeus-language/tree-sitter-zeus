@@ -48,6 +48,7 @@
 [
   "if"
   "else"
+  "match"
 ;  "switch"
 ] @keyword.conditional
 

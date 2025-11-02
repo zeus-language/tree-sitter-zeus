@@ -121,6 +121,7 @@ module.exports = grammar({
         $.break,
         $.continue,
         seq($.call_expression, ";"),
+        seq($.match_expression, ";"),
         // TODO: other kinds of statements
       ),
     if_statement: ($) =>
@@ -132,6 +133,13 @@ module.exports = grammar({
         field("value", seq("=", $._expression)),
         ";",
       ),
+    match_expression: ($) => seq("match", $._expression, $.match_block),
+    match_block: ($) =>
+      seq("{", repeat(seq($.match_key, "=>", $._expression, ",")), "}"),
+    match_key: ($) =>
+      choice($.identifier, $.constant_list, $.number, $.char_literal, $.range),
+    constant_list: ($) =>
+      seq($.number, "|", repeat(seq($.number, optional("|")))),
     for_statement: ($) =>
       seq(
         "for",
@@ -183,6 +191,7 @@ module.exports = grammar({
         prec(2, $.field_access),
         prec(3, $.identifier),
         prec(4, $.typecast),
+        prec(5, $.match_expression),
 
         // TODO: other kinds of expressions
       ),
