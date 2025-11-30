@@ -1,3 +1,5 @@
+(identifier)      @variable
+
 ; -- Keywords
 [
   "return"
@@ -30,16 +32,23 @@
 
 (primitive_type) @type.builtin
 (type) @type
+(struct_definition
+  name: (identifier) @type)
 ;(return_type) @type
 
-(identifier)      @identifier
+
 
 ; -- Builtin constants
+(function_definition
+  name: (identifier) @function.method)
+(call_expression
+  function: (identifier) @function.method)
 
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]+$'"))
 (call_expression
   function: (identifier) @function)
+(parameter (identifier) @variable.parameter)
 
 ; arguably a constant, but we highlight it as a keyword
 "fn" @keyword.function

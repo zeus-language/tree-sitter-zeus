@@ -1000,10 +1000,25 @@
   {
     "type": "struct_definition",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "generic",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "comment",
@@ -1011,14 +1026,6 @@
         },
         {
           "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "generic",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {

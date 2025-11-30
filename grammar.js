@@ -45,8 +45,7 @@ module.exports = grammar({
     struct_definition: ($) =>
       seq(
         "struct",
-        $.identifier,
-        optional($.generic),
+        field("name", seq($.identifier, optional($.generic))),
         "{",
         repeat($.parameter),
         repeat(choice($.function_definition, $.comment)),
