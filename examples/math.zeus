@@ -20,6 +20,7 @@ fn main()  : i32{
     println(test_var);
 
     // test more complex integer math
+    println("Output: ");
     test_var = (TEST_CONST + 10) * x  + MY_CONST;
     println(test_var);
     test_var = TEST_CONST + 10 * x + MY_CONST;
