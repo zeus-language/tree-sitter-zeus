@@ -78,6 +78,11 @@
 ;] @punctuation.delimiter
 
 ; -- Literals
+[
+  (true)
+  (false)
+  (null)
+] @constant.builtin
 
 (number)   @number
 (string_literal)   @string
