@@ -10,6 +10,7 @@
   "struct"
   "as"
   "extern"
+  "enum"
 ] @keyword
 
 ; -- Punctuation & operators

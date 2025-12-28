@@ -40,7 +40,12 @@ module.exports = grammar({
     source_file: ($) => repeat($._definition),
 
     use_statement: ($) =>
-      seq("use", repeat(seq($.identifier, optional("::"))), ";"),
+      seq(
+        "use",
+        repeat(seq($.identifier, optional("::"))),
+        optional(seq("as", $.identifier)),
+        ";",
+      ),
 
     struct_definition: ($) =>
       seq(
@@ -51,7 +56,6 @@ module.exports = grammar({
         repeat(choice($.function_definition, $.comment)),
         "}",
       ),
-
     struct_initialization: ($) =>
       prec.left(
         PREC.field,
@@ -66,8 +70,14 @@ module.exports = grammar({
         $.comment,
         $.use_statement,
         $.struct_definition,
+        $.enum_definition,
         // TODO: other kinds of definitions
       ),
+
+    enum_definition: ($) => seq("enum", $.identifier, $.enum_block),
+    enum_block: ($) => seq("{", repeat($.enum_variant), "}"),
+    enum_variant: ($) =>
+      seq($.identifier, optional(seq("=", $.number)), optional(",")),
     comment: ($) => choice($.line_comment, $.block_comment),
 
     line_comment: ($) => token(prec(PREC.COMMENT, seq("//", /[^\n]*/))),
