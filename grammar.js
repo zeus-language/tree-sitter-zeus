@@ -124,11 +124,18 @@ module.exports = grammar({
         prec(3, $.identifier),
         prec(3, $.array_type),
         prec(2, $.pointer_type),
+        prec(2, $.function_type),
         prec(2, $.ref_type),
         prec(1, $.generic_type),
         // TODO: other kinds of types
       ),
     pointer_type: ($) => seq("*", $.type),
+    function_type: ($) =>
+      seq(
+        "fn",
+        $.parameter_list,
+        optional(seq(":", field("return_type", $.type))),
+      ),
     ref_type: ($) => seq("&", $.type),
     generic: ($) => seq("<", $.non_generic_type, ">"),
     generic_type: ($) => seq($.identifier, $.generic),

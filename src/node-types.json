@@ -581,6 +581,32 @@
     }
   },
   {
+    "type": "function_type",
+    "named": true,
+    "fields": {
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "generic",
     "named": true,
     "fields": {},
@@ -1068,6 +1094,10 @@
       "types": [
         {
           "type": "array_type",
+          "named": true
+        },
+        {
+          "type": "function_type",
           "named": true
         },
         {
