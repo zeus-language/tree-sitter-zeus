@@ -94,6 +94,10 @@ module.exports = grammar({
       ),
 
     parameter_list: ($) => seq("(", optional(repeat($.parameter)), ")"),
+    type_parameter_list: ($) =>
+      seq("(", optional(repeat($.type_parameter)), ")"),
+    type_parameter: ($) =>
+      seq(field("mut", optional($.mut)), field("type", $.type), optional(",")),
     parameter: ($) =>
       seq(
         field("name", $.identifier),
@@ -133,7 +137,7 @@ module.exports = grammar({
     function_type: ($) =>
       seq(
         "fn",
-        $.parameter_list,
+        $.type_parameter_list,
         optional(seq(":", field("return_type", $.type))),
       ),
     ref_type: ($) => seq("&", $.type),
