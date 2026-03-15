@@ -133,13 +133,20 @@ module.exports = grammar({
         "void",
       ),
     non_generic_type: ($) =>
-      choice($.primitive_type, "string", $.identifier, $.array_type),
+      choice(
+        $.primitive_type,
+        "string",
+        $.identifier,
+        $.array_type,
+        $.slice_type,
+      ),
     type: ($) =>
       choice(
         prec(3, $.primitive_type),
         prec(3, "string"),
         prec(3, $.identifier),
         prec(3, $.array_type),
+        prec(2, $.slice_type),
         prec(2, $.pointer_type),
         prec(2, $.function_type),
         prec(2, $.ref_type),
@@ -157,6 +164,7 @@ module.exports = grammar({
     generic: ($) => seq("<", $.non_generic_type, ">"),
     generic_type: ($) => seq($.identifier, $.generic),
     array_type: ($) => seq("[", $.type, ";", $.number, "]"),
+    slice_type: ($) => seq("[", $.type, "]"),
     block: ($) => seq("{", repeat($._statement), "}"),
     defer: ($) => seq("defer", choice($._statement, $.block)),
 
