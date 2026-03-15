@@ -251,7 +251,7 @@ module.exports = grammar({
     return_statement: ($) => seq("return", $._expression, ";"),
     field_access: ($) =>
       prec.left(PREC.field, seq($.identifier, ".", $.primary_expression)),
-    typecast: ($) => seq($._expression, "as", $.type),
+    typecast: ($) => prec.left(PREC.cast, seq($._expression, "as", $.type)),
     primary_expression: ($) =>
       choice(
         $.number,
@@ -264,9 +264,11 @@ module.exports = grammar({
         $.field_access,
         $.identifier,
         $.match_expression,
+        $.not_expression,
         $.typecast,
         $.array_access,
       ),
+    not_expression: ($) => prec.left(PREC.unary, seq("not", $._expression)),
     _initializer_expression: ($) =>
       choice($.struct_initialization, $._expression),
     _expression: ($) =>

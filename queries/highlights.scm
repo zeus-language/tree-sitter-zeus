@@ -13,6 +13,7 @@
   "enum"
   "pub"
   "defer"
+  "not"
 ] @keyword
 
 ; -- Punctuation & operators
@@ -70,7 +71,7 @@
   "break"
   "continue"
 ] @keyword.repeat
-
+"not" @operator
 ;[
 ;  "["
 ;  "]"
