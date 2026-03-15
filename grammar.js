@@ -71,6 +71,7 @@ module.exports = grammar({
         $.use_statement,
         $.struct_definition,
         $.enum_definition,
+        $.variable_declaration,
         // TODO: other kinds of definitions
       ),
 
@@ -87,6 +88,7 @@ module.exports = grammar({
     extern_function_definition: ($) =>
       seq(
         "extern",
+        optional("pub"),
         "fn",
         field("name", $.identifier),
         $.parameter_list,
@@ -95,6 +97,7 @@ module.exports = grammar({
       ),
     function_definition: ($) =>
       seq(
+        optional("pub"),
         "fn",
         field("name", $.identifier),
         optional($.generic),
@@ -155,6 +158,7 @@ module.exports = grammar({
     generic_type: ($) => seq($.identifier, $.generic),
     array_type: ($) => seq("[", $.type, ";", $.number, "]"),
     block: ($) => seq("{", repeat($._statement), "}"),
+    defer: ($) => seq("defer", choice($._statement, $.block)),
 
     _statement: ($) =>
       choice(
@@ -169,6 +173,7 @@ module.exports = grammar({
         $.for_statement,
         $.break,
         $.continue,
+        $.defer,
         seq($.call_expression, ";"),
         seq($.match_expression, ";"),
         // TODO: other kinds of statements
@@ -351,7 +356,7 @@ module.exports = grammar({
 
     identifier: ($) => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
 
-    number: ($) => /\d+/,
+    number: ($) => /\d+(\.\d+(f?))?/,
   },
 });
 /**

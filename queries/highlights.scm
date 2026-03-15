@@ -11,6 +11,8 @@
   "as"
   "extern"
   "enum"
+  "pub"
+  "defer"
 ] @keyword
 
 ; -- Punctuation & operators
