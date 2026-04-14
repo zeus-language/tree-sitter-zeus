@@ -14,6 +14,7 @@
   "pub"
   "defer"
   "not"
+  "type"
 ] @keyword
 
 ; -- Punctuation & operators

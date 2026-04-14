@@ -61,6 +61,14 @@ module.exports = grammar({
         PREC.field,
         seq($.identifier, optional($.generic), "{", repeat($.field_init), "}"),
       ),
+    type_definition: ($) =>
+      seq(
+        optional("extern"),
+        "type",
+        $.identifier,
+        optional(seq("=", $.type)),
+        ";",
+      ),
     field_init: ($) =>
       seq(field("name", $.identifier), ":", $._expression, optional(";")),
     _definition: ($) =>
@@ -72,6 +80,7 @@ module.exports = grammar({
         $.struct_definition,
         $.enum_definition,
         $.variable_declaration,
+        $.type_definition,
         // TODO: other kinds of definitions
       ),
 
@@ -260,6 +269,18 @@ module.exports = grammar({
     field_access: ($) =>
       prec.left(PREC.field, seq($.identifier, ".", $.primary_expression)),
     typecast: ($) => prec.left(PREC.cast, seq($._expression, "as", $.type)),
+    lambda_args: ($) => seq("|", repeat(seq($.lambda_arg, optional(","))), "|"),
+    lambda_arg: ($) => seq($.identifier, optional(seq(":", $.type))),
+    lambda_expression: ($) =>
+      prec.left(
+        PREC.closure,
+        seq(
+          $.lambda_args,
+          optional(seq(":", $.type)),
+          choice($.block, $._statement),
+          optional(";"),
+        ),
+      ),
     primary_expression: ($) =>
       choice(
         $.number,
@@ -275,6 +296,7 @@ module.exports = grammar({
         $.not_expression,
         $.typecast,
         $.array_access,
+        $.lambda_expression,
       ),
     not_expression: ($) => prec.left(PREC.unary, seq("not", $._expression)),
     _initializer_expression: ($) =>
