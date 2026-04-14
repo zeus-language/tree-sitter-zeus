@@ -42,7 +42,7 @@
 ;(return_type) @type
 
 
-
+(annotation_identifier) @attribute
 ; -- Builtin constants
 (function_definition
   name: (identifier) @function.method)

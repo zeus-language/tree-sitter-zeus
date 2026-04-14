@@ -94,8 +94,15 @@ module.exports = grammar({
 
     block_comment: ($) => seq("/*", /[a-zA-Z ]+/, "*/"),
 
+    annotation_identifier: ($) => /@[_\p{XID_Start}][_\p{XID_Continue}]*/,
+    annotation: ($) => seq($.annotation_identifier, $.annotation_args),
+    annotation_list: ($) => repeat1($.annotation),
+    annotation_args: ($) => seq("(", repeat($.annotation_arg), ")"),
+    annotation_arg: ($) => seq($.identifier, "=", $.constant),
+    constant: ($) => choice($.number, $.string_literal),
     extern_function_definition: ($) =>
       seq(
+        optional($.annotation_list),
         "extern",
         optional("pub"),
         "fn",
@@ -106,6 +113,7 @@ module.exports = grammar({
       ),
     function_definition: ($) =>
       seq(
+        optional($.annotation_list),
         optional("pub"),
         "fn",
         field("name", $.identifier),
