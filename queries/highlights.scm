@@ -17,6 +17,9 @@
   "type"
 ] @keyword
 
+"#else" @keyword
+"#endif" @keyword
+"#if" @keyword
 ; -- Punctuation & operators
 
 "(" @punctuation.bracket

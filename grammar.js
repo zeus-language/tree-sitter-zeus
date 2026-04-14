@@ -81,6 +81,7 @@ module.exports = grammar({
         $.enum_definition,
         $.variable_declaration,
         $.type_definition,
+        $.macros,
         // TODO: other kinds of definitions
       ),
 
@@ -199,6 +200,7 @@ module.exports = grammar({
         $.break,
         $.continue,
         $.defer,
+        $.macros,
         seq($.call_expression, ";"),
         seq($.match_expression, ";"),
         // TODO: other kinds of statements
@@ -225,7 +227,8 @@ module.exports = grammar({
         field("value", seq("=", $._expression)),
         ";",
       ),
-
+    if_macro: ($) => seq(macro("if"), $._expression),
+    macros: ($) => choice($.if_macro, macro("else"), macro("endif")),
     match_expression: ($) => seq("match", $._expression, $.match_block),
     match_block: ($) =>
       seq("{", repeat(seq($.match_key, "=>", $._expression, ",")), "}"),
@@ -419,4 +422,14 @@ function commaSep1(rule) {
  */
 function commaSep(rule) {
   return optional(commaSep1(rule));
+}
+/**
+ * Creates a macro regex rule
+ *
+ * @param {RegExp | Rule | string} command
+ *
+ * @returns {AliasRule}
+ */
+function macro(command) {
+  return alias(new RegExp("#[ \t]*" + command), "#" + command);
 }

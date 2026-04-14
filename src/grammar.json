@@ -290,6 +290,10 @@
         {
           "type": "SYMBOL",
           "name": "type_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "macros"
         }
       ]
     },
@@ -1191,6 +1195,10 @@
           "name": "defer"
         },
         {
+          "type": "SYMBOL",
+          "name": "macros"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -1367,6 +1375,51 @@
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "if_macro": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "#[ \t]*if"
+          },
+          "named": false,
+          "value": "#if"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
+    "macros": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "if_macro"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "#[ \t]*else"
+          },
+          "named": false,
+          "value": "#else"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "#[ \t]*endif"
+          },
+          "named": false,
+          "value": "#endif"
         }
       ]
     },

@@ -325,6 +325,10 @@
           "named": true
         },
         {
+          "type": "macros",
+          "named": true
+        },
+        {
           "type": "match_expression",
           "named": true
         },
@@ -511,6 +515,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "macros",
           "named": true
         },
         {
@@ -864,6 +872,25 @@
     }
   },
   {
+    "type": "if_macro",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -994,6 +1021,10 @@
           "named": true
         },
         {
+          "type": "macros",
+          "named": true
+        },
+        {
           "type": "match_expression",
           "named": true
         },
@@ -1015,6 +1046,21 @@
         },
         {
           "type": "while_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "macros",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "if_macro",
           "named": true
         }
       ]
@@ -1380,6 +1426,10 @@
           "named": true
         },
         {
+          "type": "macros",
+          "named": true
+        },
+        {
           "type": "struct_definition",
           "named": true
         },
@@ -1734,6 +1784,18 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "#else",
+    "named": false
+  },
+  {
+    "type": "#endif",
+    "named": false
+  },
+  {
+    "type": "#if",
     "named": false
   },
   {
