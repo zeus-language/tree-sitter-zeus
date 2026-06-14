@@ -600,28 +600,7 @@
   {
     "type": "extern_function_definition",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -631,7 +610,7 @@
           "named": true
         },
         {
-          "type": "parameter_list",
+          "type": "function_signature_base",
           "named": true
         }
       ]
@@ -812,6 +791,61 @@
     }
   },
   {
+    "type": "function_signature",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_list",
+          "named": true
+        },
+        {
+          "type": "function_signature_base",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_signature_base",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_type",
     "named": true,
     "fields": {
@@ -929,6 +963,36 @@
         },
         {
           "type": "primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interface_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "function_signature",
           "named": true
         }
       ]
@@ -1218,7 +1282,7 @@
           }
         ]
       },
-      "type": {
+      "ptype": {
         "multiple": false,
         "required": true,
         "types": [
@@ -1426,6 +1490,10 @@
           "named": true
         },
         {
+          "type": "interface_definition",
+          "named": true
+        },
+        {
           "type": "macros",
           "named": true
         },
@@ -1496,6 +1564,10 @@
         },
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -1995,7 +2067,15 @@
     "named": false
   },
   {
+    "type": "implements",
+    "named": false
+  },
+  {
     "type": "in",
+    "named": false
+  },
+  {
+    "type": "interface",
     "named": false
   },
   {

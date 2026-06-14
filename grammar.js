@@ -46,11 +46,20 @@ module.exports = grammar({
         optional(seq("as", $.identifier)),
         ";",
       ),
+    interface_definition: ($) =>
+      seq(
+        "interface",
+        field("name", $.identifier),
+        "{",
+        repeat(choice($.function_signature, $.comment)),
 
+        "}",
+      ),
     struct_definition: ($) =>
       seq(
         "struct",
         field("name", seq($.identifier, optional($.generic))),
+        optional(seq("implements", repeat(seq($.identifier, optional(","))))),
         "{",
         repeat($.parameter),
         repeat(choice($.function_definition, $.comment)),
@@ -82,6 +91,7 @@ module.exports = grammar({
         $.variable_declaration,
         $.type_definition,
         $.macros,
+        $.interface_definition,
         // TODO: other kinds of definitions
       ),
 
@@ -101,16 +111,22 @@ module.exports = grammar({
     annotation_args: ($) => seq("(", repeat($.annotation_arg), ")"),
     annotation_arg: ($) => seq($.identifier, "=", $.constant),
     constant: ($) => choice($.number, $.string_literal),
-    extern_function_definition: ($) =>
+    function_signature: ($) =>
+      seq(optional($.annotation_list), $.function_signature_base),
+    function_signature_base: ($) =>
       seq(
-        optional($.annotation_list),
-        "extern",
-        optional("pub"),
         "fn",
         field("name", $.identifier),
         $.parameter_list,
         optional(seq(":", field("return_type", $.type))),
         ";",
+      ),
+    extern_function_definition: ($) =>
+      seq(
+        optional($.annotation_list),
+        "extern",
+        optional("pub"),
+        $.function_signature_base,
       ),
     function_definition: ($) =>
       seq(
@@ -134,7 +150,7 @@ module.exports = grammar({
         field("name", $.identifier),
         ":",
         field("mut", optional($.mut)),
-        field("type", $.type),
+        field("ptype", $.type),
         optional(","),
       ),
     mut: ($) => "mut",

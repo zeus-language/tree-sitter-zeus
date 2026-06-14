@@ -68,6 +68,47 @@
         }
       ]
     },
+    "interface_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "interface"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "function_signature"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
     "struct_definition": {
       "type": "SEQ",
       "members": [
@@ -99,6 +140,47 @@
               }
             ]
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "implements"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -294,6 +376,10 @@
         {
           "type": "SYMBOL",
           "name": "macros"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "interface_definition"
         }
       ]
     },
@@ -500,7 +586,7 @@
         }
       ]
     },
-    "extern_function_definition": {
+    "function_signature": {
       "type": "SEQ",
       "members": [
         {
@@ -516,21 +602,14 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "extern"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "pub"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
+          "type": "SYMBOL",
+          "name": "function_signature_base"
+        }
+      ]
+    },
+    "function_signature_base": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": "fn"
@@ -575,6 +654,43 @@
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "extern_function_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "annotation_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "extern"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_signature_base"
         }
       ]
     },
@@ -798,7 +914,7 @@
         },
         {
           "type": "FIELD",
-          "name": "type",
+          "name": "ptype",
           "content": {
             "type": "SYMBOL",
             "name": "type"

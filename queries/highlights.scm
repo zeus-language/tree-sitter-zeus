@@ -1,5 +1,6 @@
 (identifier)      @variable
 
+
 ; -- Keywords
 [
   "return"
@@ -15,6 +16,8 @@
   "defer"
   "not"
   "type"
+  "interface"
+  "implements"
 ] @keyword
 
 "#else" @keyword
@@ -42,6 +45,16 @@
 (type) @type
 (struct_definition
   name: (identifier) @type)
+
+(variable_declaration
+  name: (identifier) @variable
+  type: ":" (type) @type)
+(parameter
+  (identifier) @label)
+(parameter
+ (type) @type
+  )
+
 ;(return_type) @type
 
 
@@ -56,7 +69,7 @@
  (#match? @constant "^[A-Z][A-Z\\d_]+$'"))
 (call_expression
   function: (identifier) @function)
-(parameter (identifier) @variable.parameter)
+;(parameter (identifier) @variable.parameter)
 
 ; arguably a constant, but we highlight it as a keyword
 "fn" @keyword.function
